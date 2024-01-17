@@ -6,7 +6,9 @@ use App\Entity\Users;
 use App\Service\JWTService;
 use App\Service\SendMailService;
 use App\Form\RegistrationFormType;
+use App\Repository\UsersRepository;
 use App\Security\UsersAuthenticator;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -75,8 +77,26 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/verif/{token}', name: 'verify_user')]
-    public function verifyUser($token, JWTService $jwt): Response
+    public function verifyUser($token, JWTService $jwt, UsersRepository $usersRepository, EntityManagerInterface $emi): Response
     {
-        dd($jwt->isValid($token));
+        //On vérifie si le token est valide, n'a pas expiré et n'a pas été modifié
+        if ($jwt->isValid($token) AND !$jwt->isExpired($token) AND !$jwt->check($token, $this->getParameter('app.jwtsecret'))) {
+            //On récupère le Payload
+            $payload = $jwt->getPayload($token);
+
+            //On récupère le user du token
+            $user = $usersRepository->find($payload['user_id']);
+
+            //On vérifie que l'utilisateur existe et n'a pas encore activé son compte
+            if ($user AND !$user->getIs_verified()) {
+                $user->setIs_verified(true);
+                $emi->flush($user);
+                $this->addFlash('success', 'Utilisateur activé');
+                return $this->redirectToRoute('profile_index');
+            }
+        }
+        //Après vérification token non valide
+        $this->addFlash('danger', 'Le token est invalide ou a expiré');
+        return $this->redirectToRoute('app_login');
     }
 }
