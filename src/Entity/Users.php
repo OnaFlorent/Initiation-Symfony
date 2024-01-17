@@ -47,11 +47,11 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 150)]
     private ?string $city = null;
 
-    #[ORM\Column(type: 'boolean')]
-    private $is_verified = false;
-
     #[ORM\Column(length: 255)]
     private ?string $email = null;
+
+    #[ORM\Column(type: 'boolean')]
+    private $is_verified = false;
 
     public function __construct()
     {
