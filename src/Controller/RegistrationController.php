@@ -20,7 +20,7 @@ use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 
 class RegistrationController extends AbstractController
 {
-    #[Route('/inscription', name: 'app_register')]
+    #[Route(path: '/inscription', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, UsersAuthenticator $authenticator, EntityManagerInterface $entityManager, SendMailService $mail, JWTService $jwt): Response
     {
         $user = new Users();
@@ -57,7 +57,7 @@ class RegistrationController extends AbstractController
 
             //On envoie un mail
             $mail->send(
-                'no-reply@monsite.net',
+                'no-reply@afpa.fr',
                 $user->getEmail(),
                 'Activation de votre compte sur notre site',
                 'register',

@@ -4,10 +4,10 @@
 {% endblock %}
 
 {% block body %}
-	<section class="container">
+	<section class="container my-3">
 		<div class="row">
 			<div class="col">
-				<h1>Inscription</h1>
+				<h1 class="h3 mb-3 font-weight-normal">Inscription</h1>
 
 				{{ form_errors(registrationForm) }}
 
@@ -32,8 +32,8 @@
                     }) }}
 				    {{ form_row(registrationForm.agreeTerms) }}
 
-				    <button type="submit" class="btn btn-primary btn-lg my-3">M'inscrire</button>
-					<a href="{{ path('app_login')}}" class="btn btn-secondary">Me connecter</a>
+				    <button type="submit" class="btn btn-primary btn-lg mt-3">M'inscrire</button>
+					<a href="{{ path('app_login')}}" class="btn btn-secondary mt-3">Me connecter</a>
 				{{ form_end(registrationForm) }}
 			</div>
 		</div>

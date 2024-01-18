@@ -50,6 +50,9 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $email = null;
 
+    #[ORM\Column(type: 'string', length: 100, nullable: true)]
+    private $resetToken;
+
     #[ORM\Column(type: 'boolean')]
     private $is_verified = false;
 
@@ -208,6 +211,18 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEmail(string $email): static
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getResetToken()
+    {
+        return $this->resetToken;
+    }
+
+    public function setResetToken($resetToken)
+    {
+        $this->resetToken = $resetToken;
 
         return $this;
     }
