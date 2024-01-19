@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification du profil de {{ app.user.lastname }} {{ app.user.firstname }}{% endblock %}
+
+{% block body %}
+	<section class="container my-3">
+		<div class="row">
+			<div class="col">
+				<h1 class="h3 mb-3 font-weight-normal">Modification du profil de {{ app.user.login }}</h1>
+				
+                {{ form_errors(editProfileFormType) }}
+
+				{{ form_start(editProfileFormType) }}
+				    <fieldset class="mb-3">
+					    {{ form_row(editProfileFormType.lastname) }}
+					    {{ form_row(editProfileFormType.firstname) }}
+					    {{ form_row(editProfileFormType.address) }}
+					    {{ form_row(editProfileFormType.zipcode) }}
+					    {{ form_row(editProfileFormType.city) }}
+					    {{ form_row(editProfileFormType.email) }}
+				    </fieldset>
+                    <button type="submit" class="btn btn-primary btn-lg mt-3">Valider les modifications</button>
+				    <a href="{{ path('profile_index') }}" class="btn btn-secondary mt-3">Mon compte</a>
+                {{ form_end(editProfileFormType) }}
+			</div>
+		</div>
+	</section>
+{% endblock %}
