@@ -1,21 +1,82 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Profil de {{ app.user.lastname }} {{ app.user.firstname }}{% endblock %}
+{% block title %}Profil de {{ app.user.login }}{% endblock %}
 
 {% block body %}
-	<section class="container my-3">
-		<div class="row">
-			<div class="col">
-				<h1 class="h3 mb-3 font-weight-normal">Profil de {{ app.user.login }}</h1>
-                <div>Nom : {{ app.user.lastname }}</div>
-                <div>Prénom : {{ app.user.firstname }}</div>
-                <div>Addresse : {{ app.user.address }}</div>
-                <div>Ville : {{ app.user.city }}</div>
-                <div>Code postal : {{ app.user.zipcode }}</div>
-                <div>E-mail : {{ app.user.email }}</div>
-                <a href="{{ path('profile_edit_profile') }}" class="btn btn-primary mt-3">Modifier le profil</a>
-                <a href="/" class="btn btn-secondary mt-3">Retour à l'accueil</a>
+	<section class="container my-3" >
+		<div class="container px-4 py-4">
+			<h1 class="pb-2 border-bottom fw-bold">Profil de {{ app.user.login }}</h1>
+			<div class="row row-cols-1 row-cols-md-2 align-items-md-center g-5 py-5">
+				<div class="col d-flex flex-column align-items-start gap-2">
+					<h2 class="fw-bold text-body-emphasis">Left-aligned title explaining these awesome features</h2>
+					<p class="text-body-secondary">Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+					<a href="{{ path('profile_edit_profile') }}" class="btn btn-primary btn-lg">Modifier le profil</a>
+					<a href="/" class="btn btn-secondary">Retour à l'accueil</a>
+				</div>
+
+				<div class="col">
+					<div class="row row-cols-1 row-cols-sm-2 g-4">
+						<div class="col d-flex flex-column gap-2">
+							<div class="d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
+								<svg class="bi" width="1em" height="1em">
+									<use xlink:href="#collection"/>
+								</svg>
+							</div>
+							<h4 class="fw-semibold mb-0 text-body-emphasis">Nom: {{ app.user.lastname }}</h4>
+						</div>
+
+						<div class="col d-flex flex-column gap-2">
+							<div class="d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
+								<svg class="bi" width="1em" height="1em">
+									<use xlink:href="#gear-fill"/>
+								</svg>
+							</div>
+							<h4 class="fw-semibold mb-0 text-body-emphasis">Prénom : {{ app.user.firstname }}</h4>
+						</div>
+
+						<div class="col d-flex flex-column gap-2">
+							<div class="d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
+								<svg class="bi" width="1em" height="1em">
+									<use xlink:href="#speedometer"/>
+								</svg>
+							</div>
+							<h4 class="fw-semibold mb-0 text-body-emphasis">
+								<div>Addresse :
+								</div>
+							</h4>
+							<div>
+								<p>{{ app.user.address }}, {{ app.user.zipcode }} {{ app.user.city }}</p>
+							</div>
+						</div>
+
+						<div class="col d-flex flex-column gap-2">
+							<div class="d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
+								<svg class="bi" width="1em" height="1em">
+									<use xlink:href="#table"/>
+								</svg>
+							</div>
+							<h4 class="fw-semibold mb-0 text-body-emphasis">E-mail :
+							</h4>
+							<div>
+								<p>{{ app.user.email }}</p>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
+		{# <div class="row">
+					<div class="col">
+						<h1 class="h3 mb-3 font-weight-normal">Profil de {{ app.user.login }}</h1>
+		                <div>Nom : {{ app.user.lastname }}</div>
+		                <div>Prénom : {{ app.user.firstname }}</div>
+		                <div>Addresse : {{ app.user.address }}</div>
+		                <div>Ville : {{ app.user.city }}</div>
+		                <div>Code postal : {{ app.user.zipcode }}</div>
+		                <div>E-mail : {{ app.user.email }}</div>
+		                <a href="{{ path('profile_edit_profile') }}" class="btn btn-primary mt-3">Modifier le profil</a>
+		                <a href="/" class="btn btn-secondary mt-3">Retour à l'accueil</a>
+					</div>
+				</div> #}
 	</section>
 {% endblock %}

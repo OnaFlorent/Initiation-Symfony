@@ -6,20 +6,20 @@
 	<section class="container my-3">
 		<div class="row">
 			<div class="col">
-				<h1 class="h3 mb-3 font-weight-normal">Inscription</h1>
+				<h1 class="pb-2 border-bottom fw-bold">Inscription</h1>
 
 				{{ form_errors(registrationForm) }}
 
 				{{ form_start(registrationForm) }}
                     <fieldset class="mb-3">
-                        <legend>Mon identité</legend>
+                        <legend class='fw-bold'>Mon identité</legend>
 				        {{ form_row(registrationForm.login) }}
 				        {{ form_row(registrationForm.lastname) }}
 				        {{ form_row(registrationForm.firstname) }}
                     </fieldset>
 
                     <fieldset class="mb-3">
-                        <legend>Mes coordonnées</legend>
+                        <legend class='fw-bold'>Mes coordonnées</legend>
                         {{ form_row(registrationForm.address) }}
                         {{ form_row(registrationForm.zipcode) }}
                         {{ form_row(registrationForm.city) }}

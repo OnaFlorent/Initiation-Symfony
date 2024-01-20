@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Connexion
-{% endblock %}
+{% block title %}Connexion{% endblock %}
 
 {% block body %}
 	<section class="container my-3">
@@ -20,7 +19,7 @@
 					</div>
 				{% endif %}
 
-				<h1 class="h3 mb-3 font-weight-normal">Me connecter</h1>
+				<h1 class="pb-2 border-bottom fw-bold">Me connecter</h1>
 				<label for="inputLogin">Login</label>
 				<input type="text" value="{{ last_username }}" name="login" id="inputLogin" class="form-control" autocomplete="username" required autofocus>
 				<label for="inputPassword">Mot de passe</label>
