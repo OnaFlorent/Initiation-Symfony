@@ -8,9 +8,11 @@
 			<h1 class="pb-2 border-bottom fw-bold">Profil de {{ app.user.login }}</h1>
 			<div class="row row-cols-1 row-cols-md-2 align-items-md-center g-5 py-5">
 				<div class="col d-flex flex-column align-items-start gap-2">
-					<h2 class="fw-bold text-body-emphasis">Left-aligned title explaining these awesome features</h2>
-					<p class="text-body-secondary">Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
-					<a href="{{ path('profile_edit_profile') }}" class="btn btn-primary btn-lg">Modifier le profil</a>
+					<h2 class="fw-bold text-body-emphasis">Mes différentes informations :</h2>
+					<a href="#"><h4 class="fw-semibold text-body-secondary">Ma liste de souhaits</h4></a>
+					<a href="#"><h4 class="fw-semibold text-body-secondary">Mes abbonnements</h4></a>
+					<a href="{{ path('profile_edit_profile') }}" class="btn btn-primary btn-lg mt-4">Modifier le profil {{ app.user.login }}</a>
+					<a href="{{ path('profile_edit_password') }}" class="btn btn-secondary">Modifier le mot de passe</a>
 					<a href="/" class="btn btn-secondary">Retour à l'accueil</a>
 				</div>
 
@@ -22,7 +24,7 @@
 									<use xlink:href="#collection"/>
 								</svg>
 							</div>
-							<h4 class="fw-semibold mb-0 text-body-emphasis">Nom: {{ app.user.lastname }}</h4>
+							<h4 class="fw-semibold mb-0 text-body-emphasis">Nom : {{ app.user.lastname }}</h4>
 						</div>
 
 						<div class="col d-flex flex-column gap-2">
@@ -41,8 +43,7 @@
 								</svg>
 							</div>
 							<h4 class="fw-semibold mb-0 text-body-emphasis">
-								<div>Addresse :
-								</div>
+								<div>Adresse :</div>
 							</h4>
 							<div>
 								<p>{{ app.user.address }}, {{ app.user.zipcode }} {{ app.user.city }}</p>
