@@ -36,7 +36,7 @@ class UsersFixtures extends Fixture
 
         $faker = Faker\Factory::create('fr_FR');
 
-        for($usr = 1; $usr <= 5; $usr++)
+        for($usr = 1; $usr <= 10; $usr++)
         {
             $user = new Users();
             $user->setLogin($faker->userName);

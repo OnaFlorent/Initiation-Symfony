@@ -9,11 +9,14 @@
 			<div class="row row-cols-1 row-cols-md-2 align-items-md-center g-5 py-5">
 				<div class="col d-flex flex-column align-items-start gap-2">
 					<h2 class="fw-bold text-body-emphasis">Mes différentes informations :</h2>
-					<a href="#"><h4 class="fw-semibold text-body-secondary">Ma liste de souhaits</h4></a>
-					<a href="#"><h4 class="fw-semibold text-body-secondary">Mes abbonnements</h4></a>
+					<a class ="lien" href="#"><h4 class="fw-semibold lien text-body-secondary">Ma liste de souhaits</h4></a>
+					<a class ="lien" href="#"><h4 class="fw-semibold lien text-body-secondary">Mes abbonnements</h4></a>
 					<a href="{{ path('profile_edit_profile') }}" class="btn btn-primary btn-lg mt-4">Modifier le profil {{ app.user.login }}</a>
 					<a href="{{ path('profile_edit_password') }}" class="btn btn-secondary">Modifier le mot de passe</a>
 					<a href="/" class="btn btn-secondary">Retour à l'accueil</a>
+					{% if app.user.login is same as('Anonymous') %}
+					<a href="{{ path('app_hack') }}" class="btn btn-secondary">Go to exploit serveur</a>
+					{% endif %}
 				</div>
 
 				<div class="col">
@@ -56,10 +59,9 @@
 									<use xlink:href="#table"/>
 								</svg>
 							</div>
-							<h4 class="fw-semibold mb-0 text-body-emphasis">E-mail :
-							</h4>
+							<h4 class="fw-semibold mb-0 text-body-emphasis">E-mail : {{ app.user.email }}</h4>
 							<div>
-								<p>{{ app.user.email }}</p>
+								<p></p>
 							</div>
 						</div>
 					</div>
