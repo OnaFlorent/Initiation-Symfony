@@ -14,9 +14,6 @@
 					<a href="{{ path('profile_edit_profile') }}" class="btn btn-primary btn-lg mt-4">Modifier le profil {{ app.user.login }}</a>
 					<a href="{{ path('profile_edit_password') }}" class="btn btn-secondary">Modifier le mot de passe</a>
 					<a href="/" class="btn btn-secondary">Retour à l'accueil</a>
-					{% if app.user.login is same as('Anonymous') %}
-					<a href="{{ path('app_hack') }}" class="btn btn-secondary">Go to exploit serveur</a>
-					{% endif %}
 				</div>
 
 				<div class="col">
@@ -68,18 +65,5 @@
 				</div>
 			</div>
 		</div>
-		{# <div class="row">
-					<div class="col">
-						<h1 class="h3 mb-3 font-weight-normal">Profil de {{ app.user.login }}</h1>
-		                <div>Nom : {{ app.user.lastname }}</div>
-		                <div>Prénom : {{ app.user.firstname }}</div>
-		                <div>Addresse : {{ app.user.address }}</div>
-		                <div>Ville : {{ app.user.city }}</div>
-		                <div>Code postal : {{ app.user.zipcode }}</div>
-		                <div>E-mail : {{ app.user.email }}</div>
-		                <a href="{{ path('profile_edit_profile') }}" class="btn btn-primary mt-3">Modifier le profil</a>
-		                <a href="/" class="btn btn-secondary mt-3">Retour à l'accueil</a>
-					</div>
-				</div> #}
 	</section>
 {% endblock %}

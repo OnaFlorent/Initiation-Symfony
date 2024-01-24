@@ -4,15 +4,16 @@ namespace App\Controller;
 
 use App\Entity\Users;
 use App\Service\JWTService;
+use Doctrine\ORM\EntityManager;
 use App\Service\SendMailService;
 use App\Form\RegistrationFormType;
 use App\Repository\UsersRepository;
 use App\Security\UsersAuthenticator;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -27,6 +28,12 @@ class RegistrationController extends AbstractController
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
+        // Réponse JSON si c'est une requête Ajax
+        if ($request->isXmlHttpRequest()) {
+            $response = ['success' => true, 'message' => 'L\'utilisateur a été ajouté avec succès'];
+            return new JsonResponse($response);
+        }
+
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
             $user->setPassword(
@@ -38,7 +45,7 @@ class RegistrationController extends AbstractController
 
             $entityManager->persist($user);
             $entityManager->flush();
-            // do anything else you need here, like send an email
+            
 
             //On génère le JWT de l'utilisateur
             //On crée le Header

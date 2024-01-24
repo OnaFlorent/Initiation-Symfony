@@ -37,4 +37,50 @@
 			</div>
 		</div>
 	</section>
+
+    <script>
+        $(document).ready(function () {
+            $("#submit").click(function (e) {
+                e.preventDefault();
+
+                // Récupérer les données du formulaire
+                var formdata = $('registrationForm').serialize();
+
+                $.ajax({
+                    url: "{{ path('app_register') }}",
+                    type: 'POST',
+                    dataType: 'json', //text
+                    data: formdata,
+                    success: function (response) {
+                        console.log(response);
+
+                        // Afficher une popup de succès stylisée
+                        showAlert('Succès', 'L\'utilisateur a été ajouté avec succès', 'success');
+                        
+                        // Réalisez d'autres actions si nécessaire
+                        // Réinitialiser le formulaire
+                        $('registrationForm')[0].reset();
+                    },
+                    error: function (response) {
+                        console.log('Erreur Ajax:', response);
+
+                        // Afficher une popup d'erreur stylisée
+                        showAlert('Erreur', 'Erreur lors de l\'ajout de l\'utilisateur', 'error');
+                    }
+                });
+            });
+
+            // Fonction pour afficher une popup stylisée avec SweetAlert2
+            function showAlert(title, message, icon) {
+                Swal.fire({
+                    title: title,
+                    text: message,
+                    icon: icon,
+                    showCancelButton: false,
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK'
+                });
+            }
+        });
+    </script>
 {% endblock %}
