@@ -26,17 +26,18 @@
                         {{ form_row(registrationForm.email) }}
                     </fieldset>
 
-				    {{ form_row(registrationForm.plainPassword, {
-                        label: 'Password'
-                    }) }}
-				    {{ form_row(registrationForm.agreeTerms) }}
+				    {{ form_row(registrationForm.plainPassword) }}
 
-				    <button type="submit" class="btn btn-primary btn-lg mt-3">M'inscrire</button>
+
+				    <button type="submit" class="btn btn-primary btn-lg mt-3" id="submit">M'inscrire</button>
 					<a href="{{ path('app_login')}}" class="btn btn-secondary mt-3">Me connecter</a>
 				{{ form_end(registrationForm) }}
 			</div>
 		</div>
-	</section>
+	</section>{% endblock %}
+	{% block javascripts %}
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <script>
         $(document).ready(function () {
@@ -44,28 +45,28 @@
                 e.preventDefault();
 
                 // Récupérer les données du formulaire
-                var formdata = $('registrationForm').serialize();
+                var registrationFormdata = $('form').serialize();
 
                 $.ajax({
                     url: "{{ path('app_register') }}",
                     type: 'POST',
                     dataType: 'json', //text
-                    data: formdata,
+                    data: registrationFormdata,
                     success: function (response) {
                         console.log(response);
 
                         // Afficher une popup de succès stylisée
-                        showAlert('Succès', 'L\'utilisateur a été ajouté avec succès', 'success');
+                        showAlert('Succès', 'Utilisateur a été ajouté avec succès', 'success');
                         
                         // Réalisez d'autres actions si nécessaire
                         // Réinitialiser le formulaire
-                        $('registrationForm')[0].reset();
+                        $('form')[0].reset();
                     },
                     error: function (response) {
                         console.log('Erreur Ajax:', response);
 
                         // Afficher une popup d'erreur stylisée
-                        showAlert('Erreur', 'Erreur lors de l\'ajout de l\'utilisateur', 'error');
+                        showAlert('Erreur', 'Erreur lors de ajout de utilisateur', 'error');
                     }
                 });
             });

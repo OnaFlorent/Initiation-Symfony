@@ -28,12 +28,6 @@ class RegistrationController extends AbstractController
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
-        // Réponse JSON si c'est une requête Ajax
-        if ($request->isXmlHttpRequest()) {
-            $response = ['success' => true, 'message' => 'L\'utilisateur a été ajouté avec succès'];
-            return new JsonResponse($response);
-        }
-
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
             $user->setPassword(
@@ -45,7 +39,6 @@ class RegistrationController extends AbstractController
 
             $entityManager->persist($user);
             $entityManager->flush();
-            
 
             //On génère le JWT de l'utilisateur
             //On crée le Header
@@ -71,11 +64,20 @@ class RegistrationController extends AbstractController
                 compact('user', 'token')
             );
 
+            // Réponse JSON si c'est une requête Ajax
+            if ($request->isXmlHttpRequest()) {
+                $response = ['success' => true, 'message' => 'Utilisateur a été ajouté avec succès'];
+                return new JsonResponse($response);
+            }
+
             return $userAuthenticator->authenticateUser(
                 $user,
                 $authenticator,
                 $request
             );
+
+
+           
         }
 
         return $this->render('registration/register.html.twig', [
